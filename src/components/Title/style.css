@@ -1,0 +1,9 @@
+.row {
+  width: 100vw;
+  text-align: center;
+  font-size: 3rem;
+  color: black;
+  margin-bottom: 50px;
+  background-color: #e02c1f;
+  padding: 30px 0;
+}
