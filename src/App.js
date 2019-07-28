@@ -6,9 +6,60 @@ import pokeballs from "./pokeballs.json";
 
 class App extends Component {
   state = {
-    pokeballs
+    pokeballs,
+    score: 0,
+    highScore: 0,
+    userClicked: [],
+    message: "Click a Pokeball to begin!"
   };
 
+
+  buttonClick = (id) => {
+    var clickedBall = this.state.userClicked;
+
+    if (clickedBall === null) {
+      clickedBall = [...clickedBall, id];
+      this.setState({
+        score: this.state.score + 1,
+        userClicked: clickedBall,
+        message: "Click another ball!"
+      })
+    }
+    else if (clickedBall.includes(id)) {
+      clickedBall = [];
+      this.setState({
+        score: 0,
+        userClicked: clickedBall,
+        message: "You lost! Try again!"
+      })
+    }
+    else {
+      clickedBall.push(id)
+      this.setState({
+        score: this.state.score + 1
+      })
+      if (this.state.score === 9) {
+        clickedBall = [];
+        this.setState({
+          score: 0,
+          highScore: 9,
+          userClicked: clickedBall,
+          message: "You win! Click a ball to play again!"
+        })
+      }
+      else if (this.state.score > this.state.highScore) {
+        this.setState({
+          highScore: this.state.score,
+          message: "Click another ball!"
+        })
+      }
+      else {
+        this.setState({
+          message: "Click another ball!"
+        })
+      }
+    }
+  }
   
 
   render() {
@@ -17,11 +68,11 @@ class App extends Component {
         <Title>Pokeballs List</Title>
         {this.state.pokeballs.map(pokeballs => (
           <PokeballsCard
-            // removepokeballs={this.removepokeballs}
             id={pokeballs.id}
             key={pokeballs.id}
             name={pokeballs.name}
             image={pokeballs.image}
+            buttonClick={this.buttonClick}
           />
         ))}
       </Wrapper>
