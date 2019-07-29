@@ -7,15 +7,15 @@ function Title(props) {
   <div className="row">
 
     <div className="col-4">
-      <h1><b>Clicky Game</b></h1>
+      <h1><b>Pokeball Click Game</b></h1>
     </div>
 
     <div className="col-4">
-      <h1 className="title">Click an image to begin!</h1>
+      <h1 className="title">{props.message}</h1>
     </div>
 
     <div className="col-4">
-      <h1>Score: x | Top Score: x</h1>
+      <h1>Score: {props.score} | Top Score: {props.highScore}</h1>
     </div>
 
   </div>

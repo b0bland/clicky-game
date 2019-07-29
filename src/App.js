@@ -28,7 +28,7 @@ class App extends Component {
     else if (clickedBall.includes(id)) {
       clickedBall = [];
       this.setState({
-        score: this.state.score,
+        score: 0,
         userClicked: clickedBall,
         message: "You lost! Try again!"
       })
@@ -38,18 +38,18 @@ class App extends Component {
       this.setState({
         score: this.state.score + 1
       })
-      if (this.state.score === 9) {
+      if (clickedBall.length === 9) {
         clickedBall = [];
         this.setState({
-          score: 9,
+          score: 0,
           highScore: 9,
           userClicked: clickedBall,
           message: "You win! Click a ball to play again!"
         })
       }
-      else if (this.state.score > this.state.highScore) {
+      else if (this.state.score >= this.state.highScore) {
         this.setState({
-          highScore: this.state.score,
+          highScore: this.state.score + 1,
           message: "Click another ball!"
         })
       }
@@ -70,7 +70,11 @@ class App extends Component {
   render() {
     return (
       <Wrapper>
-        <Title>Pokeballs List</Title>
+        <Title 
+          message={this.state.message}
+          score={this.state.score}
+          highScore={this.state.highScore}
+        />
         {this.state.pokeballs.map(pokeballs => (
           <PokeballsCard
             id={pokeballs.id}
