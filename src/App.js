@@ -3,6 +3,7 @@ import PokeballsCard from "./components/PokeballsCard";
 import Wrapper from "./components/Wrapper";
 import Title from "./components/Title";
 import pokeballs from "./pokeballs.json";
+import shuffle from "shuffle-array";
 
 class App extends Component {
   state = {
@@ -13,14 +14,13 @@ class App extends Component {
     message: "Click a Pokeball to begin!"
   };
 
-
   buttonClick = (id) => {
     var clickedBall = this.state.userClicked;
 
     if (clickedBall === null) {
       clickedBall = [...clickedBall, id];
       this.setState({
-        score: this.state.score + 1,
+        score: 1,
         userClicked: clickedBall,
         message: "Click another ball!"
       })
@@ -28,7 +28,7 @@ class App extends Component {
     else if (clickedBall.includes(id)) {
       clickedBall = [];
       this.setState({
-        score: 0,
+        score: this.state.score,
         userClicked: clickedBall,
         message: "You lost! Try again!"
       })
@@ -41,7 +41,7 @@ class App extends Component {
       if (this.state.score === 9) {
         clickedBall = [];
         this.setState({
-          score: 0,
+          score: 9,
           highScore: 9,
           userClicked: clickedBall,
           message: "You win! Click a ball to play again!"
@@ -59,8 +59,13 @@ class App extends Component {
         })
       }
     }
+    this.cardShuffle();
   }
-  
+
+  cardShuffle = () => {
+    shuffle(this.state.pokeballs);
+    this.setState({ pokeballs })
+  }
 
   render() {
     return (
