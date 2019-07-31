@@ -1,3 +1,18 @@
+# Pokeball Clicky Game
+
+![GIF of the site](public/site.gif "GIF of the website")
+
+This is a game where the player must click all 9 Pokeballs without clicking a single ball twice. If a ball is clicked a second time, the player loses. If a player clicks all 9 without losing, they win the game. 
+
+## Technologies
+* React.js
+* Materialize
+
+## Authors
+* Alfred Chan
+
+***
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
